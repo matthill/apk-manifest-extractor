@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="apkExtractor" default="build-jar" basedir=".">
+	
+	<property environment="env"/>
+	
+	<property name="build.dir"		value="build"/>
+	<property name="src.dir"		value="src"/>
+	<property name="bin.dir"		value="bin"/>
+	<property name="lib.dir"		value="lib"/>
+
+	
+	<path id="project.classpath">
+
+	</path>
+	
+	<target name="clean">
+		<delete dir="${bin.dir}" failonerror="true"/>
+	</target>
+	
+	<target name="build" depends="clean">
+		
+	      <mkdir dir="${bin.dir}"/>
+	      <javac srcdir="${src.dir}"
+		  destdir="${bin.dir}"
+		  includes="**"
+		  encoding="utf-8"      	
+	   	      source="1.5"
+	 	      target="1.5"
+	 	      nowarn="true"
+	   	      debug="true"
+	   	      debuglevel="lines,vars,source">
+		<classpath refid="project.classpath"/>
+	      </javac>
+      
+	</target>
+
+	<target name="build-jar" depends="build">
+		
+          <jar destfile="apkextractor.jar"
+         	basedir="${bin.dir}"
+         	excludes="**/*.jar">
+
+        <manifest>
+            	<attribute name="Main-Class" value="com.pras.Extract" />
+	</manifest>
+
+	</jar>
+	</target>
+
+
+</project>
